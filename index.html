@@ -1,0 +1,362 @@
+<!DOCTYPE html><html><head><title></title><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /><style type='text/css'>
+body {
+  font-family: 'Helvetica';
+  letter-spacing:-5px;
+  background:#000;
+  background-size:100%;
+  color:#fff;
+  margin:0;
+  padding:0;
+  font-weight:bold;
+}
+
+h1, h2, h3, p {
+  margin:0;
+}
+
+em, a {
+  font-style:normal;
+  color:#8dbd0c;
+}
+
+i {
+  color:#8dbd0c;
+}
+
+a {
+  background: #34d0e7;
+  color:#000;
+  text-decoration:none;
+}
+
+img {
+  width:100%;
+}
+
+div {
+  cursor:pointer;
+  cursor:hand;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+.sidebar {
+	color: #000;
+}
+
+.sidebar em {
+	color: red;
+}
+
+p {
+	display: none;
+}
+</style><script type='text/javascript'>
+window.onload = function() {
+    var s = document.getElementsByTagName('div'), cur = 0;
+    if (!s) return;
+    function go(n) {
+        cur = n;
+        var i = 1e3, e = s[n];
+        for (var k = 0; k < s.length; k++) s[k].style.display = 'none';
+        e.style.display = 'block';
+        e.style.fontSize = i + 'px';
+        if (e.firstChild.nodeName === 'IMG') {
+            document.body.style.backgroundImage = 'url(' + e.firstChild.src + ')';
+            e.firstChild.style.display = 'none';
+        } else {
+            document.body.style.backgroundImage = '';
+            document.body.style.backgroundColor = e.style.backgroundColor;
+        }
+        while (
+            e.offsetWidth > window.innerWidth ||
+            e.offsetHeight > window.innerHeight) {
+            e.style.fontSize = (i -= 10) + 'px';
+            if (i < 0) break;
+        }
+        e.style.marginTop = ((window.innerHeight - e.offsetHeight) / 2) + 'px';
+        if (window.location.hash !== n) window.location.hash = n;
+        document.title = e.textContent || e.innerText;
+		
+		if(e.className === 'sidebar') {
+			document.body.style.backgroundColor = 'white';
+		} else {
+			document.body.style.backgroundColor = 'black';
+		}
+    }
+    document.onclick = function() {
+        go(++cur % (s.length));
+    };
+    document.onkeydown = function(e) {
+        (e.which === 39) && go(Math.min(s.length - 1, ++cur));
+        (e.which === 37) && go(Math.max(0, --cur));
+    };
+    function parse_hash() {
+        return Math.max(Math.min(
+            s.length - 1,
+            parseInt(window.location.hash.substring(1), 10)), 0);
+    }
+    if (window.location.hash) cur = parse_hash() || cur;
+    window.onhashchange = function() {
+        var c = parse_hash();
+        if (c !== cur) go(c);
+    };
+
+    go(cur);
+};
+</script></head><body>
+
+<div>
+	Hi
+</div>
+<div>
+	I'm a developer, and I want to help <em>OpenStreetMap</em> 
+</div>
+<div>
+	<img src="saman.jpg">
+	<p>
+		This is a follow up to a talk given at SotM US in June by Saman.
+		Like me he works at MapBox and we've both worked on the website
+		and on iD.
+	</p>
+</div>
+<div>
+	<em>Ground up</em> redesign
+	<p>
+		What Saman proposed in his talk -- it's online, I recommend watching
+		it if you haven't already -- was a ground up redesign of OSM.org.
+	</p>
+</div>
+<div>
+	No <em>constraints</em>
+	<p>
+		What would OSM.org look like if we started from scratch, and designed
+		without resource constraints -- both server resources and
+		engineering resources -- the existing feature set, the familiarity of
+		the existing design (because folks sometimes get upset if you remove
+		or change a feature they depend on).
+	</p>
+</div>
+<div>
+	#1: information architecture
+	
+	<p>
+		The website has grown organically over the years, accreting a
+		number of useful features, but not a lot of attention has been
+		paid to thinking about what the purpose of What are the use cases?
+	</p>
+</div>
+<div>
+	#2: onboarding experience
+	
+	<p>
+		Connecting communities and helping new users
+	</p>
+</div>
+<div>
+	#3: strengthen the community
+	
+	<p>
+		New social features
+		Gamification (four letter word)
+		Facebook, Strava
+	</p>
+</div>
+<div>
+	What now<em>?</em>
+
+	<div>
+		This was great. It got people thinking about what OSM.org could be if
+		it lived up to its full potential.
+	</div>
+</div>
+
+<!-- Recap -->
+<div>
+	Constraints
+	
+	<p>
+		I want to implement this vision. But when we start
+		talking about implementation, which we did in the sprint days that
+		followed SotM, we can no longer ignore the constraints. We had to think
+		about how to get there from where we are now, taking into account the
+		time and technical resources we have.
+	</p>
+</div>
+<div>
+	Incremental, organic change
+	
+	<p>
+		And what we came up with, after talking about it, was that we should
+		start by working on small improvents that could stand on their own.
+		
+		- Organic growth. Design changes must also happen organically.
+	</p>
+</div>
+<div>
+	Map Controls
+</div>
+<div><img src="layers.jpg">
+</div>
+<div>
+	Sharing
+</div>
+<div><img src="sharing.jpg">
+</div>
+<div>
+	#hash permalinks
+</div>
+<div><img src="globy.jpg">
+	<p>
+		Onboarding experience
+	</p>
+</div>
+<div>
+	User menu
+</div>
+<div>
+	[image]
+</div>
+<div>
+	iD
+</div>
+<div>
+	[iD graph]
+</div>
+
+<!-- Goals -->
+<div>
+	Goals
+</div>
+<div>
+	3 areas for improvement<br>
+	(IA, onboarding, community)
+</div>
+<div>
+	Connecting communities
+	
+	<p>
+		OSM is an open data project -- we focus on the data first and foremost,
+		and leave the mapping (and all the other uses) to third parties, with
+		the hope that those third party services, or their users, contribute
+		back to OSM.
+		
+		We try to mandate that throught the license terms -- but in fact
+		virtually nothing has ever been contributed back through force of
+		license. People give back because it benefits them, and because it's
+		easy to and fun to do. And the latter is the goal with the design
+		changes we're making -- make it easy and fun for users of other
+		communities, who may not even have known that they were using OSM
+		data, to become contributors.
+	</p>
+</div>
+<div>
+	It's not <em>1996</em>
+	
+	<p>
+		Serious project
+		Alive and current
+	</p>
+</div>
+
+<!-- Sidebar: constructive criticism -->
+<div class="sidebar">
+	<em>Change</em>
+	
+	<p>
+		The theme of this State of the Map is Change, and since what we're
+		talking about here is change to the website, I wanted to do a little
+		sidebar about change itself.
+		
+		It's interesting to read about
+		how people think about and respond to change, and apply that psychology
+		to software development.
+		
+		I can't go into detail, but if this sounds interesting to you too,
+		read about: "loss aversion" -- which is a tendency to strongly prefer
+		avoiding losses to acquiring gains. And "status quo bias", a preference
+		for the current state of affairs.
+	</p>
+</div>
+<div class="sidebar">
+	Loss Aversion
+</div class="sidebar">
+<div class="sidebar">
+	Status Quo Bias
+</div>
+<div class="sidebar">
+	<img src="oatmeal1.png" height="100%">
+	
+	<p>
+		We get feedback. The majority of it is positive, helpful, constructive,
+		and thoughtful, and has improved what we've done immensely. Thank you
+		to everyone who has contributed in this way -- many of you are here
+		this weekend. It feels great to get this kind of feedback.
+	</p>
+</div>
+<div class="sidebar">
+	<img src="oatmeal2.png" height="100%">
+	
+	<p>
+		But -- not everyone will like every change, and some people seemingly
+		dislike like most every change, and are not afraid to express their
+		dislike, unconstructively.
+				
+		I think this is largely a phenomenon of mailing lists. I've never gotten
+		unconstructive criticism from someone I've had beers with or met in 
+		person -- these are by and large community members who don't attend
+		conferences.
+		
+		I don't have a solution for this. But, this does have an effect on one's
+		self esteem, so I just want to say -- be moderate, and, moderate and
+		continue to call out bad behavior on mailing lists.
+		
+		Thank you!
+	</p>
+</div>
+
+<!-- Looking Forward -->
+
+<div>
+	What Next?
+</div>
+<div>
+	Continuing Incremental Change
+</div>
+<div>
+	<em>Help</em> &amp; <em>About</em> pages
+</div>
+<div>
+	OpenID &amp; Social Sign Up
+</div>
+<div>
+	[Screenshot of sign in]
+	
+	<p>
+		The sign in page has buttons for quickly signing in with
+		known OpenID providers. These should be on the sign up page
+		as well, and the option of using Facebook, Twitter, and
+		GitHub should be included as well.
+		
+		Goes back to making the goal of making the sign up process
+		as easy as possible.
+	</p>
+</div>
+<div>
+	User profiles
+	
+	???
+</div>
+<div>
+	Front-page design
+</div>
+<div>
+	<img src="front_page_1.png" height="100%">
+</div>
+<div>
+	<img src="front_page_2.png" height="100%">
+</div>
+<div>
+	[Open Awesome!]
+</div>
