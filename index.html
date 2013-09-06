@@ -1,4 +1,10 @@
-<!DOCTYPE html><html><head><title></title><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /><style type='text/css'>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<style type='text/css'>
 body {
   font-family: 'Helvetica';
   letter-spacing:-5px;
@@ -29,16 +35,17 @@ a {
   text-decoration:none;
 }
 
-img {
-  width:100%;
-}
-
 div {
   cursor:pointer;
   cursor:hand;
   position:absolute;
   top:0;
   left:0;
+}
+
+.full {
+	width: 100%;
+	height: 100%;
 }
 
 .sidebar {
@@ -52,7 +59,8 @@ div {
 p {
 	display: none;
 }
-</style><script type='text/javascript'>
+</style>
+<script type='text/javascript'>
 window.onload = function() {
     var s = document.getElementsByTagName('div'), cur = 0;
     if (!s) return;
@@ -61,21 +69,18 @@ window.onload = function() {
         var i = 1e3, e = s[n];
         for (var k = 0; k < s.length; k++) s[k].style.display = 'none';
         e.style.display = 'block';
-        e.style.fontSize = i + 'px';
-        if (e.firstChild.nodeName === 'IMG') {
-            document.body.style.backgroundImage = 'url(' + e.firstChild.src + ')';
-            e.firstChild.style.display = 'none';
-        } else {
-            document.body.style.backgroundImage = '';
-            document.body.style.backgroundColor = e.style.backgroundColor;
-        }
-        while (
-            e.offsetWidth > window.innerWidth ||
-            e.offsetHeight > window.innerHeight) {
-            e.style.fontSize = (i -= 10) + 'px';
-            if (i < 0) break;
-        }
-        e.style.marginTop = ((window.innerHeight - e.offsetHeight) / 2) + 'px';
+		
+		if(e.className !== 'full') {
+	        e.style.fontSize = i + 'px';
+            while (
+                e.offsetWidth > window.innerWidth ||
+                e.offsetHeight > window.innerHeight) {
+                e.style.fontSize = (i -= 10) + 'px';
+                if (i < 0) break;
+            }
+            e.style.marginTop = ((window.innerHeight - e.offsetHeight) / 2) + 'px';
+	    }
+	 
         if (window.location.hash !== n) window.location.hash = n;
         document.title = e.textContent || e.innerText;
 		
@@ -118,7 +123,7 @@ window.onload = function() {
 	</p>
 </div>
 <div>
-	<img src="saman.jpg">
+	<img src="saman.jpg" style="width: 100%">
 	<p>
 		This is a follow up to a talk given at SotM US in June by Saman.
 		Like me he works at MapBox and we've both worked on the website
@@ -250,12 +255,14 @@ window.onload = function() {
 <div>
 	Map Controls
 </div>
-<div><img src="layers.jpg">
+<div class='full' style="text-align: center">
+	<img src="layers.jpg">
 </div>
 <div>
 	Sharing
 </div>
-<div><img src="sharing.jpg">
+<div class='full' style="text-align: center">
+	<img src="sharing.jpg" style="height: 100%">
 </div>
 <div>
 	#hash permalinks
@@ -263,7 +270,7 @@ window.onload = function() {
 <div>
 	Onboarding experience
 </div>
-<div><img src="globy.jpg">
+<div class='full' style="background-image: url(globy.jpg)">
 	<p>
 	</p>
 </div>
@@ -379,11 +386,11 @@ window.onload = function() {
 <div>
 	Front-page design
 </div>
-<div>
-	<img src="front_page_1.png" height="100%">
+<div class='full'>
+	<img src="front_page_1.png" style="width: 100%">
 </div>
-<div>
-	<img src="front_page_2.png" height="100%">
+<div class='full'>
+	<img src="front_page_2.png" style="width: 100%">
 	
 	<p>
 		This is it -- this is our vision, evolved. And unlike what
